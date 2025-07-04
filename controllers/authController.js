@@ -18,6 +18,12 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    if (!password || password.length < 5) {
+      return res.status(400).json({
+        message: "Password must be at least 5 characters long",
+      });
+    }
+
     // Determine user role: Admin if correct token is provided, otherwise Member
     let role = "member";
     if (
